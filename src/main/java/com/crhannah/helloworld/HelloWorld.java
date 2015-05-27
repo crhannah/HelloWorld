@@ -2,8 +2,8 @@ package com.crhannah.helloworld;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -21,6 +21,9 @@ public class HelloWorld extends HttpServlet {
 	private String header;
 	private Random rnd;
 
+	/*
+	 *  Most of the following are from http://www.wiseoldsayings.com/humorous1.htm and are only used for didactic purposes
+	 */
 	private String[] sayings = {
 			"Better a witty fool than a foolish wit. - Shakespeare",
 			"A balanced diet is a cookie in each hand. - unknown",
@@ -62,9 +65,9 @@ public class HelloWorld extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("<h1>" + header + "</h1>");
 		out.println("<p>" + sayings[rnd.nextInt(sayings.length - 1)] + "</p>");
-		out.println("<h5>"
-				+ LocalDateTime.now().format(
-						DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+		out.println("<h5>" +
+				new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime())
+//				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
 				+ "</h5>");
 	}
 
